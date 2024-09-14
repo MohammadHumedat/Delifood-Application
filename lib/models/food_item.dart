@@ -2,7 +2,28 @@ class FoodItem {
   final String name;
   final String imgurl;
   final double price;
-  FoodItem({required this.name, required this.imgurl, required this.price});
+  final bool isFavorite;
+  FoodItem(
+      {required this.name,
+      required this.imgurl,
+      required this.price,
+      this.isFavorite = false});
+
+  FoodItem copywith({
+
+    String? name,
+    String? imgurl,
+    double? price,
+    bool? isFavorite,
+
+    
+  }) {
+return FoodItem(
+        name: name ?? this.name,
+        imgurl: imgurl ?? this.imgurl,
+        price: price ?? this.price,
+        isFavorite: isFavorite ?? this.isFavorite);
+  }
 }
 
 List<FoodItem> food = [
@@ -30,10 +51,11 @@ List<FoodItem> food = [
           'https://e7.pngegg.com/pngimages/94/423/png-clipart-pasta-pasta-thumbnail.png',
       price: 10.0),
   FoodItem(
-      name: 'Beaf Steak',
-      imgurl:
-          'https://e7.pngegg.com/pngimages/970/842/png-clipart-barbecue-chophouse-restaurant-meat-raffle-beef-beef-tenderloin-food-beef-thumbnail.png',
-      price: 15.0),
+    name: 'Beaf Steak',
+    imgurl:
+        'https://e7.pngegg.com/pngimages/970/842/png-clipart-barbecue-chophouse-restaurant-meat-raffle-beef-beef-tenderloin-food-beef-thumbnail.png',
+    price: 15.0,
+  ),
   FoodItem(
       name: 'Checken Pizza',
       imgurl:
@@ -44,8 +66,9 @@ List<FoodItem> food = [
       imgurl: 'https://www.pngarts.com/files/3/Chicken-Burger-PNG-Photo.png',
       price: 3),
   FoodItem(
-      name: 'Chicken Burger',
-      imgurl:
-          'https://www.pngarts.com/files/3/Chicken-Burger-PNG-Image-Background.png',
-      price: 6.5),
+    name: 'Chicken Burger',
+    imgurl:
+        'https://www.pngarts.com/files/3/Chicken-Burger-PNG-Image-Background.png',
+    price: 6.5,
+  ),
 ];

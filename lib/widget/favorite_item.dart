@@ -15,8 +15,9 @@ class FavoriteItem extends StatelessWidget {
           children: [
             Image.network(
               foodItem.imgurl,
-              height: 80,
-              fit: BoxFit.cover,
+              height: 100,
+              width: 100,
+              fit: BoxFit.contain,
             ),
             const SizedBox(
               width: 20,

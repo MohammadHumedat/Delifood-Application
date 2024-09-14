@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
 
-class FoodGridItem extends StatelessWidget {
-  final FoodItem foodItem;
+class FoodGridItem extends StatefulWidget {
+  final int foodIndex;
+  const FoodGridItem({super.key, required this.foodIndex});
 
-  const FoodGridItem({super.key, required this.foodItem});
+  @override
+  State<FoodGridItem> createState() => _FoodGridItemState();
+}
 
+class _FoodGridItemState extends State<FoodGridItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,17 +19,46 @@ class FoodGridItem extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image.network(
-            foodItem.imgurl,
-            fit: BoxFit.cover,
-            scale: 4,
-            alignment: Alignment.center,
+          Stack(
+            children: [
+              Image.network(
+                food[widget.foodIndex].imgurl,
+                fit: BoxFit.contain,
+                height: 100,
+                width: 110,
+                scale: 4,
+                alignment: Alignment.center,
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: const Color.fromARGB(255, 240, 237, 237),
+                  ),
+                  child: InkWell(
+                    onTap: () => setState(() {
+                      food[widget.foodIndex] = food[widget.foodIndex].copywith(
+                          isFavorite: !food[widget.foodIndex].isFavorite);
+                    }),
+                    child: Icon(
+                      food[widget.foodIndex].isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: Colors.deepOrange,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 7,
           ),
           Text(
-            foodItem.name,
+            food[widget.foodIndex].name,
             style: const TextStyle(
                 fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold),
           ),
@@ -33,7 +66,7 @@ class FoodGridItem extends StatelessWidget {
             height: 3,
           ),
           Text(
-            '\$ ${foodItem.price}',
+            '\$ ${food[widget.foodIndex].price}',
             style: const TextStyle(
               fontSize: 15,
               color: Color.fromARGB(255, 176, 111, 14),

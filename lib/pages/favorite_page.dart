@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/widget/favorite_item.dart';
-import 'package:food_delivery/widget/food_grid_item.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({super.key});
@@ -11,10 +10,14 @@ class FavoritePage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
-        itemCount: food.length,
+        itemCount: food.where((foodItem) => foodItem.isFavorite == true).length,
         itemBuilder: (context, index) => Padding(
           padding: const EdgeInsets.all(8),
-          child: FavoriteItem(foodItem: food[index]),
+          child: FavoriteItem(
+            foodItem: food
+                .where((foodItem) => foodItem.isFavorite == true)
+                .toList()[index],
+          ),
         ),
       ),
     );
@@ -25,7 +28,8 @@ class FavoritePage extends StatelessWidget {
 //       child: SingleChildScrollView(
 //         child: Column(
 //           children:
-//               food.map((foodItem) => FavoriteItem(foodItem: foodItem)).toList(),
+//               food.food
+//                .where((foodItem) => foodItem.isFavorite == true).map((foodItem) => FavoriteItem(foodItem: foodItem)).toList(),
 //         ),
 //       ),
 //     );

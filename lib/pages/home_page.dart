@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
               ),
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.all(8),
-                child: FoodGridItem(foodItem: food[index]),
+                child: FoodGridItem(foodIndex: index,),
               ),
             ),
           ],
