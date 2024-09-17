@@ -10,15 +10,12 @@ class FoodItem {
       this.isFavorite = false});
 
   FoodItem copywith({
-
     String? name,
     String? imgurl,
     double? price,
     bool? isFavorite,
-
-    
   }) {
-return FoodItem(
+    return FoodItem(
         name: name ?? this.name,
         imgurl: imgurl ?? this.imgurl,
         price: price ?? this.price,
@@ -55,20 +52,5 @@ List<FoodItem> food = [
     imgurl:
         'https://e7.pngegg.com/pngimages/970/842/png-clipart-barbecue-chophouse-restaurant-meat-raffle-beef-beef-tenderloin-food-beef-thumbnail.png',
     price: 15.0,
-  ),
-  FoodItem(
-      name: 'Checken Pizza',
-      imgurl:
-          'https://graficsea.com/wp-content/uploads/2021/12/Chicken-Supreme-Pizza-.png',
-      price: 4),
-  FoodItem(
-      name: 'Cheese Burger',
-      imgurl: 'https://www.pngarts.com/files/3/Chicken-Burger-PNG-Photo.png',
-      price: 3),
-  FoodItem(
-    name: 'Chicken Burger',
-    imgurl:
-        'https://www.pngarts.com/files/3/Chicken-Burger-PNG-Image-Background.png',
-    price: 6.5,
   ),
 ];
