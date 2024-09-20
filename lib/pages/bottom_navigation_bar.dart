@@ -15,8 +15,8 @@ class _BottomNavBarPage extends State<BottomNavBarPage> {
 
   List<Widget> selectedpages = const [
     HomePage(),
-    AccountPage(),
     FavoritePage(),
+    AccountPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -51,9 +51,9 @@ class _BottomNavBarPage extends State<BottomNavBarPage> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: 'Account'),
-            BottomNavigationBarItem(
                 icon: Icon(Icons.favorite), label: 'Favorite'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle), label: 'Account'),
           ],
         ));
   }
