@@ -30,9 +30,6 @@ class _BottomNavBarPage extends State<BottomNavBarPage> {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 25, color: Colors.black),
           ),
-          backgroundColor: const Color.fromARGB(255, 223, 219, 219),
-          elevation: 0,
-          foregroundColor: Colors.black,
         ),
         drawer: const Drawer(
           child: Center(

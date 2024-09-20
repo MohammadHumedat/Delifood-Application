@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 class AccountPage extends StatelessWidget {
@@ -41,6 +39,7 @@ class AccountPage extends StatelessWidget {
         size: 27,
         color: Colors.deepOrange,
       ),
+      onTap: () {},
     );
   }
 
@@ -85,11 +84,13 @@ class AccountPage extends StatelessWidget {
           height: 10,
         ),
         divider(),
-        itemListTile(title: 'Past Orders', icon: Icons.shopping_cart),
+        itemListTile(
+          title: 'Past Orders',
+          icon: Icons.shopping_cart,
+        ),
         divider(),
         itemListTile(title: 'Available Vouchers', icon: Icons.card_giftcard),
         divider(),
-        
       ],
     );
   }

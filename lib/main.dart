@@ -11,12 +11,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Food Delivery App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.deepOrange,
+        scaffoldBackgroundColor: const Color.fromARGB(255, 231, 226, 226),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 223, 219, 219),
+          elevation: 0,
+          foregroundColor: Colors.black,
+        ),
+        dividerTheme: const DividerThemeData(
+          thickness: 2,
+          indent: 17,
+          endIndent: 17,
+        ),
+        listTileTheme: const ListTileThemeData(
+          iconColor: Colors.deepOrange,
+        ),
       ),
-      debugShowCheckedModeBanner: false,
       home: const BottomNavBarPage(),
     );
   }
