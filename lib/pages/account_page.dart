@@ -3,37 +3,42 @@ import 'package:flutter/material.dart';
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
-  Widget orderVouchers({required String name, required int number}) {
+  Widget orderVouchers(BuildContext context,
+      {required String name, required int number}) {
     return Column(
       children: [
         Text(
-          '$number',
-          style: const TextStyle(
-              fontSize: 25,
-              color: Colors.deepOrange,
-              fontWeight: FontWeight.bold),
+          number.toString(),
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .copyWith(color: Colors.deepOrange),
         ),
         Text(
-          '$name',
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          name,
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.w400,
+              ),
         ),
       ],
     );
   }
 
-  Widget itemListTile(
+  Widget itemListTile(BuildContext context,
       {required String title, String? subtitle, required IconData icon}) {
     return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 18),
-      ),
+      title: Text(title, style: Theme.of(context).textTheme.titleLarge),
       leading: Icon(
         icon,
         size: 33,
         color: Colors.deepOrange,
       ),
-      subtitle: subtitle != null ? Text('$subtitle') : null,
+      subtitle: subtitle != null
+          ? Text(
+              '$subtitle',
+              style: Theme.of(context).textTheme.bodyMedium,
+            )
+          : null,
       trailing: const Icon(
         Icons.chevron_right,
         size: 27,
@@ -65,19 +70,21 @@ class AccountPage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
-        const Text(
+        Text(
           'Mohammad Hmedat',
-          style: TextStyle(
-              fontSize: 30, color: Colors.black, fontWeight: FontWeight.bold),
+          style: Theme.of(context)
+              .textTheme
+              .headlineMedium!
+              .copyWith(fontWeight: FontWeight.w400),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            orderVouchers(name: 'Order', number: 50),
-            orderVouchers(name: 'Vouchers', number: 10),
+            orderVouchers(context, name: 'Order', number: 50),
+            orderVouchers(context, name: 'Vouchers', number: 10),
           ],
         ),
         const SizedBox(
@@ -87,9 +94,12 @@ class AccountPage extends StatelessWidget {
         itemListTile(
           title: 'Past Orders',
           icon: Icons.shopping_cart,
+          subtitle: 'Here you find your past orders',
+          context,
         ),
         divider(),
-        itemListTile(title: 'Available Vouchers', icon: Icons.card_giftcard),
+        itemListTile(
+            title: 'Available Vouchers', icon: Icons.card_giftcard, context),
         divider(),
       ],
     );

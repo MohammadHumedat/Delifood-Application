@@ -21,12 +21,12 @@ class _FavoritePageState extends State<FavoritePage> {
               'assets/images/empty_state.png',
               fit: BoxFit.cover,
             ),
-            const Text(
+            Text(
               "There is no  favorite food yet",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge!
+                  .copyWith(fontWeight: FontWeight.w500),
             ),
           ],
         ),
@@ -57,21 +57,21 @@ class _FavoritePageState extends State<FavoritePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        food[index].name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25),
-                      ),
+                      Text(favoriteItems[index].name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(fontWeight: FontWeight.w500)),
                       const SizedBox(
                         height: 8,
                       ),
-                      Text(
-                        '\$ ${food[index].price}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Colors.deepOrange),
-                      ),
+                      Text('\$ ${favoriteItems[index].price}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                                  color: Colors.deepOrange,
+                                  fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ),
