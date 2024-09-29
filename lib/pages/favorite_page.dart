@@ -11,6 +11,7 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final favoriteItems =
         food.where((foodItem) => foodItem.isFavorite == true).toList();
     if (favoriteItems.isEmpty) {
@@ -19,6 +20,7 @@ class _FavoritePageState extends State<FavoritePage> {
           children: [
             Image.asset(
               'assets/images/empty_state.png',
+              height: size.height * 0.50,
               fit: BoxFit.cover,
             ),
             Text(
@@ -46,8 +48,7 @@ class _FavoritePageState extends State<FavoritePage> {
               children: [
                 Image.network(
                   favoriteItems[index].imgurl,
-                  height: 100,
-                  width: 100,
+                  height: size.height * 0.072,
                   fit: BoxFit.contain,
                 ),
                 const SizedBox(
@@ -63,7 +64,7 @@ class _FavoritePageState extends State<FavoritePage> {
                               .titleLarge!
                               .copyWith(fontWeight: FontWeight.w500)),
                       const SizedBox(
-                        height: 8,
+                        height: 6,
                       ),
                       Text('\$ ${favoriteItems[index].price}',
                           style: Theme.of(context)
@@ -85,7 +86,10 @@ class _FavoritePageState extends State<FavoritePage> {
                       favoriteItems.remove(targetedIndex);
                     });
                   },
-                  icon: const Icon(Icons.favorite),
+                  icon: Icon(
+                    Icons.favorite,
+                    size: size.height * 0.035,
+                  ),
                   color: Colors.deepOrange,
                 )
               ],

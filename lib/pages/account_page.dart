@@ -30,7 +30,7 @@ class AccountPage extends StatelessWidget {
       title: Text(title, style: Theme.of(context).textTheme.titleLarge),
       leading: Icon(
         icon,
-        size: 33,
+        size: MediaQuery.of(context).size.height * 0.045,
         color: Colors.deepOrange,
       ),
       subtitle: subtitle != null
@@ -39,9 +39,9 @@ class AccountPage extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             )
           : null,
-      trailing: const Icon(
+      trailing: Icon(
         Icons.chevron_right,
-        size: 27,
+        size: MediaQuery.of(context).size.height * 0.03,
         color: Colors.deepOrange,
       ),
       onTap: () {},
@@ -58,10 +58,11 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       children: [
         Container(
-          height: 250,
+          height: size.height * 0.28,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             image: DecorationImage(
