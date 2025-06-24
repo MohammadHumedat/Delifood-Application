@@ -35,7 +35,7 @@ class AccountPage extends StatelessWidget {
       ),
       subtitle: subtitle != null
           ? Text(
-              '$subtitle',
+              subtitle,
               style: Theme.of(context).textTheme.bodyMedium,
             )
           : null,
