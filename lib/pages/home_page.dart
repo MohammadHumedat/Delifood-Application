@@ -9,6 +9,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final TextScale = MediaQuery.of(context).textScaler;
+    final bool isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -18,17 +20,26 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(22),
               child: Image.asset(
                 'assets/images/classic_burger.jpg',
-                height: size.height * 0.23,
+                height: isLandScape
+                    // Check if the device is in landscape mode,using a ternary operator
+                    ? size.height * 0.5
+                    : size.height * 0.23,
                 fit: BoxFit.cover,
               ),
             ),
             const SizedBox(height: 30),
             GridView.builder(
-              shrinkWrap: true,
+              shrinkWrap:
+                  true, //to make the grid view take only the space it needs
               physics: const NeverScrollableScrollPhysics(),
               itemCount: food.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, //the number of elements in Row
+                crossAxisCount: isLandScape
+                    ? 3
+                    : 2, // number of items in a row, changes based on orientation,1 for landscape and 3 for portrait
+                childAspectRatio: isLandScape
+                    ? 1.5
+                    : 1.2, // this ratio adjusts the height and width of each grid item
                 crossAxisSpacing: size.height * 0.01,
                 mainAxisSpacing: size.height * 0.01,
               ),

@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:food_delivery/pages/bottom_navigation_bar.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();// Ensures that the binding is initialized before setting preferred orientations
+  // Lock the app orientation to portrait mode
+  // This is useful for apps that are designed to be used in portrait mode only
+  // It prevents the app from rotating to landscape mode, which can be useful for certain types of apps
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,// Disable the debug banner in the top right corner of the app
       title: 'Food Delivery App',
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,

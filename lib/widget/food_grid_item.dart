@@ -27,25 +27,30 @@ class _FoodGridItemState extends State<FoodGridItem> {
             Stack(
               alignment: Alignment.topCenter,
               children: [
-                Image.network(
-                  food[widget.foodIndex].imgurl,
-                  fit: BoxFit.contain,
-                  height: constraints.maxHeight * 0.45,
-                  alignment: Alignment.center,
-                  width: constraints.maxWidth * 0.9,
-                  errorBuilder: (context, error, stackTrace) { // Fallback for image loading errors
-                    return Container(// Display a placeholder when the image fails to load
-                      height: constraints.maxHeight * 0.45,
-                      width: constraints.maxWidth * 0.9,
-                      color: Colors.grey[300],
-                      child: const Center(
-                        child: Text(
-                          'Image not available',
-                          style: TextStyle(color: Colors.red),
+                Padding(
+                  padding: const EdgeInsets.only(top: 7.0),
+                  child: Image.network(
+                    food[widget.foodIndex].imgurl,
+                    fit: BoxFit.contain,
+                    height: constraints.maxHeight * 0.45,
+                    alignment: Alignment.center,
+                    width: constraints.maxWidth * 0.9,
+                    errorBuilder: (context, error, stackTrace) {
+                      // Fallback for image loading errors
+                      return Container(
+                        // Display a placeholder when the image fails to load
+                        height: constraints.maxHeight * 0.45,
+                        width: constraints.maxWidth * 0.9,
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Text(
+                            'Image not available',
+                            style: TextStyle(color: Colors.red),
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
                 Align(
                   alignment: Alignment.topRight,
@@ -86,8 +91,10 @@ class _FoodGridItemState extends State<FoodGridItem> {
               height: constraints.maxHeight * 0.06,
             ),
             SizedBox(
+              // Use SizedBox to control the height of the text container
               height: constraints.maxHeight * 0.17,
               child: FittedBox(
+                // Use FittedBox to scale text
                 child: Text(
                   food[widget.foodIndex].name,
                   style: Theme.of(context).textTheme.titleLarge,
@@ -95,7 +102,7 @@ class _FoodGridItemState extends State<FoodGridItem> {
               ),
             ),
             SizedBox(
-              height: constraints.maxHeight * 0.02,
+              height: constraints.maxHeight * 0.01,
             ),
             SizedBox(
               height: constraints.maxHeight * 0.16,
