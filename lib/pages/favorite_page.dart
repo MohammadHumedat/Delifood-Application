@@ -11,7 +11,9 @@ class FavoritePage extends StatefulWidget {
 class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
+    final textSacle = MediaQuery.of(context).textScaler;
     final size = MediaQuery.of(context).size;
+
     final favoriteItems =
         food.where((foodItem) => foodItem.isFavorite == true).toList();
     if (favoriteItems.isEmpty) {
@@ -24,12 +26,13 @@ class _FavoritePageState extends State<FavoritePage> {
               fit: BoxFit.cover,
             ),
             Text(
-              "There is no  favorite food yet",
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge!
-                  .copyWith(fontWeight: FontWeight.w500),
-            ),
+              "There Is No Favorite Food Yet.",
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+              textScaler: textSacle,
+              maxLines: 1,
+            )
           ],
         ),
       );
