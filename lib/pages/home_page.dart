@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/pages/food_details_page.dart';
 import 'package:food_delivery/widget/food_grid_item.dart';
 
 class HomePage extends StatelessWidget {
@@ -37,27 +38,29 @@ class HomePage extends StatelessWidget {
                   'The device have Android OS'), // Check if the device is Android, using a conditional statement
             const SizedBox(height: 30),
             GridView.builder(
-              shrinkWrap:
-                  true, //to make the grid view take only the space it needs
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: food.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: isLandScape
-                    ? 3
-                    : 2, // number of items in a row, changes based on orientation,1 for landscape and 3 for portrait
-                childAspectRatio: isLandScape
-                    ? 1.5
-                    : 1.2, // this ratio adjusts the height and width of each grid item
-                crossAxisSpacing: size.height * 0.01,
-                mainAxisSpacing: size.height * 0.01,
-              ),
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.all(8),
-                child: FoodGridItem(
-                  foodIndex: index,
+                shrinkWrap:
+                    true, //to make the grid view take only the space it needs
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: food.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: isLandScape
+                      ? 3
+                      : 2, // number of items in a row, changes based on orientation,1 for landscape and 3 for portrait
+                  childAspectRatio: isLandScape
+                      ? 1.5
+                      : 1.2, // this ratio adjusts the height and width of each grid item
+                  crossAxisSpacing: size.height * 0.01,
+                  mainAxisSpacing: size.height * 0.01,
                 ),
-              ),
-            ),
+                itemBuilder: (context, index) => GestureDetector(
+                      onTap: () => {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => FoodDetailsPage()))
+                      },
+                      child: FoodGridItem(
+                        foodIndex: index,
+                      ),
+                    )),
           ],
         ),
       ),
