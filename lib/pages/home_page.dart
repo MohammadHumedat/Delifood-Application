@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/widget/food_grid_item.dart';
@@ -27,6 +29,12 @@ class HomePage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+            if (Platform.isIOS)
+              const Text(
+                  'The device have IOS OS'), // Check if the device is IOS, using a conditional statement
+            if (Platform.isAndroid)
+              const Text(
+                  'The device have Android OS'), // Check if the device is Android, using a conditional statement
             const SizedBox(height: 30),
             GridView.builder(
               shrinkWrap:

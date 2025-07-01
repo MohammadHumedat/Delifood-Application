@@ -27,7 +27,12 @@ class AccountPage extends StatelessWidget {
   Widget itemListTile(BuildContext context,
       {required String title, String? subtitle, required IconData icon}) {
     return ListTile(
-      title: Text(title, style: Theme.of(context).textTheme.titleLarge),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontSize: MediaQuery.of(context).size.height * 0.025,
+            fontWeight: FontWeight.w400),
+      ),
       leading: Icon(
         icon,
         size: MediaQuery.of(context).size.height * 0.045,
@@ -59,50 +64,100 @@ class AccountPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Container(
-          height: size.height * 0.28,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-                image: AssetImage('assets/images/Myphoto.jpg'),
-                fit: BoxFit.contain),
-          ),
-        ),
-        const SizedBox(height: 15),
-        Text(
-          'Mohammad Hmedat',
-          style: Theme.of(context)
-              .textTheme
-              .headlineMedium!
-              .copyWith(fontWeight: FontWeight.w400),
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            orderVouchers(context, name: 'Order', number: 50),
-            orderVouchers(context, name: 'Vouchers', number: 10),
+    final textScale = MediaQuery.of(context)
+        .textScaler; // Get the size of the screen and text scale factor
+    final bool isLandScape = MediaQuery.of(context).orientation ==
+        Orientation.landscape; // Check if the device is in landscape mode
+    return SingleChildScrollView(
+      physics:
+          const BouncingScrollPhysics(), // Allows the user to scroll the page
+      child: Column(
+        children: [
+          if (!isLandScape) ...[
+            // If the device is in portrait mode, show a smaller image
+
+            Container(
+              height: size.height * 0.28,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: AssetImage('assets/images/Myphoto.jpg'),
+                    fit: BoxFit.contain),
+              ),
+            ),
+            const SizedBox(height: 15),
+            Text(
+              'Mohammad Hmedat',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                orderVouchers(context, name: 'Order', number: 50),
+                orderVouchers(context, name: 'Vouchers', number: 10),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        divider(),
-        itemListTile(
-          title: 'Past Orders',
-          icon: Icons.shopping_cart,
-          subtitle: 'Here you find your past orders',
-          context,
-        ),
-        divider(),
-        itemListTile(
-            title: 'Available Vouchers', icon: Icons.card_giftcard, context),
-        divider(),
-      ],
+          if (isLandScape) ...[
+            // If the device is in landscape mode, show a larger image
+            Row(
+              children: [
+                SizedBox(
+                    width: size.width *
+                        0.05), // Add some space to the left of the row
+                Image.asset('assets/images/Myphoto.jpg',
+                    height: size.height * 0.18,
+                    width: size.height * 0.18,
+                    fit: BoxFit.cover),
+                const SizedBox(width: 10),
+
+                // Container(
+                //   height: size.height * 0.28,
+                //   decoration: const BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     image: DecorationImage(
+                //         image: AssetImage('assets/images/Myphoto.jpg'),
+                //         fit: BoxFit.contain),
+                //   ),
+                // ),
+                SizedBox(width: size.width * 0.005),
+                Text(
+                  'Mohammad Hmedat',
+                  softWrap: true,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.w400),
+                  textScaler: textScale,
+                  maxLines: 2,
+                  // Use textScaler to adjust text size
+                ),
+              ],
+            ),
+          ],
+          divider(),
+          itemListTile(
+            title: 'Past Orders',
+            icon: Icons.shopping_cart,
+            subtitle: 'Here you find your past orders',
+            context,
+          ),
+          divider(),
+          itemListTile(
+              title: 'Available Vouchers', icon: Icons.card_giftcard, context),
+          divider(),
+        ],
+      ),
     );
   }
 }
