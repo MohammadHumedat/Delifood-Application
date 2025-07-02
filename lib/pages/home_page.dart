@@ -55,7 +55,10 @@ class HomePage extends StatelessWidget {
                 itemBuilder: (context, index) => GestureDetector(
                       onTap: () => {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => FoodDetailsPage()))
+                            builder: (context) => FoodDetailsPage(
+                                  foodItem: food[
+                                      index], // Pass the food item to the details page
+                                )))
                       },
                       child: FoodGridItem(
                         foodIndex: index,

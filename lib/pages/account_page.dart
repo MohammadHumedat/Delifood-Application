@@ -75,9 +75,11 @@ class AccountPage extends StatelessWidget {
         children: [
           if (!isLandScape) ...[
             // If the device is in portrait mode, show a smaller image
-
+            SizedBox(
+              height: size.height * 0.03, // Add some space at the top
+            ),
             Container(
-              height: size.height * 0.28,
+              height: size.height * 0.18,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(

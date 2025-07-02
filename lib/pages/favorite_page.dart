@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/pages/food_details_page.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -42,60 +43,68 @@ class _FavoritePageState extends State<FavoritePage> {
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
         itemCount: favoriteItems.length,
-        itemBuilder: (context, index) => Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Image.network(
-                  favoriteItems[index].imgurl,
-                  height: size.height * 0.072,
-                  fit: BoxFit.contain,
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(favoriteItems[index].name,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(fontWeight: FontWeight.w500)),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Text('\$ ${favoriteItems[index].price}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(
-                                  color: Colors.deepOrange,
-                                  fontWeight: FontWeight.bold)),
-                    ],
+        itemBuilder: (context, index) => GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => FoodDetailsPage(
+                      foodItem: favoriteItems[index],
+                    )));
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0)),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Image.network(
+                    favoriteItems[index].imgurl,
+                    height: size.height * 0.072,
+                    fit: BoxFit.contain,
                   ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    final targeteditem = favoriteItems[index];
-                    int targetedIndex = food.indexOf(targeteditem);
-                    setState(() {
-                      food[targetedIndex] =
-                          food[targetedIndex].copywith(isFavorite: false);
-                      favoriteItems.remove(targetedIndex);
-                    });
-                  },
-                  icon: Icon(
-                    Icons.favorite,
-                    size: size.height * 0.035,
+                  const SizedBox(
+                    width: 20,
                   ),
-                  color: Colors.deepOrange,
-                )
-              ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(favoriteItems[index].name,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleLarge!
+                                .copyWith(fontWeight: FontWeight.w500)),
+                        const SizedBox(
+                          height: 6,
+                        ),
+                        Text('\$ ${favoriteItems[index].price}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium!
+                                .copyWith(
+                                    color: Colors.deepOrange,
+                                    fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      final targeteditem = favoriteItems[index];
+                      int targetedIndex = food.indexOf(targeteditem);
+                      setState(() {
+                        food[targetedIndex] =
+                            food[targetedIndex].copywith(isFavorite: false);
+                        favoriteItems.remove(targetedIndex);
+                      });
+                    },
+                    icon: Icon(
+                      Icons.favorite,
+                      size: size.height * 0.035,
+                    ),
+                    color: Colors.deepOrange,
+                  )
+                ],
+              ),
             ),
           ),
         ),

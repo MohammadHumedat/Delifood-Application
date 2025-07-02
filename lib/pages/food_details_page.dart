@@ -1,19 +1,26 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_delivery/models/food_item.dart';
 
 class FoodDetailsPage extends StatelessWidget {
-  FoodDetailsPage({super.key});
+  final FoodItem foodItem;
+  FoodDetailsPage({super.key, required this.foodItem});
 
   @override
   Widget build(BuildContext context) {
+    double sizeFactor = MediaQuery.of(context).size.height / 100;
+
     return Scaffold(
       appBar: _buildAppBar(context),
-      body: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body: Column(
         children: [
-          Text('Details Page'),
+          Center(
+              heightFactor: sizeFactor * 3,
+              child: Text(foodItem.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                  ))),
         ],
       ),
     );
