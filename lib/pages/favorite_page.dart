@@ -94,7 +94,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       setState(() {
                         food[targetedIndex] =
                             food[targetedIndex].copywith(isFavorite: false);
-                        favoriteItems.remove(targetedIndex);
+                        favoriteItems.remove(targeteditem);
                       });
                     },
                     icon: Icon(

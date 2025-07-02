@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final TextScale = MediaQuery.of(context).textScaler;
+    // final TextScale = MediaQuery.of(context).textScaler;
     final bool isLandScape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
@@ -30,12 +30,12 @@ class HomePage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            if (Platform.isIOS)
-              const Text(
-                  'The device have IOS OS'), // Check if the device is IOS, using a conditional statement
-            if (Platform.isAndroid)
-              const Text(
-                  'The device have Android OS'), // Check if the device is Android, using a conditional statement
+            // if (Platform.isIOS)
+            //   const Text(
+            //       'The device have IOS OS'), // Check if the device is IOS, using a conditional statement
+            // if (Platform.isAndroid)
+            //   const Text(
+            //       'The device have Android OS'), // Check if the device is Android, using a conditional statement
             const SizedBox(height: 30),
             GridView.builder(
                 shrinkWrap:

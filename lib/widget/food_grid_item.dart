@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+// import 'package:flutter/rendering.dart';
 import 'package:food_delivery/models/food_item.dart';
 
 class FoodGridItem extends StatefulWidget {
@@ -14,7 +14,7 @@ class FoodGridItem extends StatefulWidget {
 class _FoodGridItemState extends State<FoodGridItem> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
     final textScale = MediaQuery.of(context).textScaler;
     return Container(
       decoration: BoxDecoration(
