@@ -1,113 +1,105 @@
-// import 'dart:io';
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/widget/food_details/property_item.dart';
+import 'package:food_delivery/widget/food_details/top_banner.dart';
 
-class FoodDetailsPage extends StatefulWidget {
+class FoodDetailsPage extends StatelessWidget {
   final FoodItem foodItem;
   const FoodDetailsPage({super.key, required this.foodItem});
 
   @override
-  State<FoodDetailsPage> createState() => _FoodDetailsPageState();
-}
-
-class _FoodDetailsPageState extends State<FoodDetailsPage> {
-  @override
   Widget build(BuildContext context) {
-    final favoriteItems =
-        food.where((foodItem) => foodItem.isFavorite == true).toList();
     // double sizeFactor = MediaQuery.of(context).size.height / 100;
     final size = MediaQuery.of(context).size;
 
-    var textScale = MediaQuery.of(context).textScaler;
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: _buildAppBar(context),
-      body: Column(
-        children: [
-          DecoratedBox(
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 243, 240, 240),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SafeArea(
-                child: SizedBox(
-                  width: size.width,
-                  height: size.height * 0.40,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 230, 227, 226),
-                                iconColor: Colors.deepOrangeAccent,
-                              ),
-                              onPressed: () => Navigator.pop(context),
-                              child: const Icon(
-                                Icons.chevron_left,
-                                size: 35,
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 230, 227, 226),
-                                  iconColor: Colors.deepOrangeAccent),
-                              onPressed: () {
-                                final targeteditem = widget
-                                    .foodItem; // Get the current food item
-                                // Find the index of the targeted item in the food list
-                                int targetedIndex = food.indexOf(
-                                    targeteditem); // Get the index of the targeted item
-                                // Update the state to remove the item from favorites
-                                setState(() {
-                                  // Toggle the isFavorite property
-                                  food[targetedIndex] = food[targetedIndex]
-                                      .copywith(
-                                          isFavorite:
-                                              !food[targetedIndex].isFavorite);
-                                  favoriteItems.remove(targeteditem);
-                                });
-                              },
-                              child: Icon(
-                                widget.foodItem.isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: Colors.deepOrange,
-                                size: textScale
-                                    .scale(23), // Use textScaler for scaling
-                                semanticLabel: widget.foodItem
-                                        .isFavorite // ternary operator for accessibility
-                                    ? 'Remove from favorites'
-                                    : 'Add to favorites', // Accessibility label for screen readers
-                                textDirection: TextDirection
-                                    .ltr, // Ensure correct text direction
-                              ),
-                            ),
-                          ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TopBanner(foodItem: foodItem),
+            const SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    foodItem.name, // Display the food item name
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.w700,
                         ),
-                        Align( // Align the image to the center
-                          heightFactor: size.height * 0.0016,
-                          alignment: Alignment.center,
-                          child: Image.network(
-                            widget.foodItem.imgurl,
-                            fit: BoxFit.cover,
-                          ),
+                  ),
+                  const SizedBox(height: 6.0),
+                  Text('Buffalo Burger',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(fontSize: 16, color: Colors.grey)),
+                  const SizedBox(height: 37.0),
+                  const IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        PropertyItem(
+                            propertyName: 'Size:', propertyValue: 'Medium'),
+                        VerticalDivider(
+                          indent: 0,
+                          endIndent: 0,
+                          color: Colors.grey,
+                        ),
+                        PropertyItem(
+                            propertyName: 'Calories: ',
+                            propertyValue: '150 kcal'),
+                        VerticalDivider(
+                          indent: 0,
+                          endIndent: 0,
+                          color: Colors.grey,
+                        ),
+                        PropertyItem(
+                            propertyName: 'Cooking: ',
+                            propertyValue: '10-15 Min'),
+                        SizedBox(
+                          height: 20,
                         ),
                       ],
                     ),
                   ),
-                ),
+                  const SizedBox(height: 25),
+                  Text(
+                      """ lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson, lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson""",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: const Color.fromARGB(255, 136, 136, 136))),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Row(
+                    children: [
+                      Text('\$ ${foodItem.price}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w600,
+                              )),
+                      SizedBox(width: size.width * 0.19),
+                      Expanded(
+                        child: SizedBox(
+                          height: size.height * 0.05,
+                          child: ElevatedButton(
+                              onPressed: () {}, child: const Text('Checkout')),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
