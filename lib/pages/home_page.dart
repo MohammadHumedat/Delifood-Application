@@ -5,9 +5,14 @@ import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/pages/food_details_page.dart';
 import 'package:food_delivery/widget/food_grid_item.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -54,11 +59,14 @@ class HomePage extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) => GestureDetector(
                       onTap: () => {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => FoodDetailsPage(
-                                  foodItem: food[
-                                      index], // Pass the food item to the details page
-                                )))
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(
+                                builder: (context) => FoodDetailsPage(
+                                    foodIndex:
+                                        index // Pass the food item to the details page
+                                    )))
+                            .then((value) => setState(
+                                () {})), // Refresh the home page after returning from the details page
                       },
                       child: FoodGridItem(
                         foodIndex: index,

@@ -65,12 +65,14 @@ class _FoodGridItemState extends State<FoodGridItem> {
                     ),
                     child: InkWell(
                       onTap: () => setState(() {
-                        food[widget.foodIndex] = food[widget.foodIndex]
+                        food[widget.foodIndex] = food[widget
+                                .foodIndex] // this is for updating the food item, by using toggle method
                             .copywith(
                                 isFavorite: !food[widget.foodIndex].isFavorite);
                       }),
                       child: Icon(
-                        food[widget.foodIndex].isFavorite
+                        food[widget.foodIndex]
+                                .isFavorite // Check if the food item is favorite
                             ? Icons.favorite
                             : Icons.favorite_border,
                         color: Colors.deepOrange,

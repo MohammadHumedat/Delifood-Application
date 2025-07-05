@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
 
-class TopBanner extends StatelessWidget {
-  final FoodItem foodItem;
+class TopBanner extends StatefulWidget {
+  final foodIndex;
 
-  const TopBanner({super.key, required this.foodItem});
+  const TopBanner({super.key, required this.foodIndex});
 
+  @override
+  State<TopBanner> createState() => _TopBannerState();
+}
+
+class _TopBannerState extends State<TopBanner> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return DecoratedBox(
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 243, 240, 240),
@@ -44,12 +50,18 @@ class TopBanner extends StatelessWidget {
                             backgroundColor:
                                 const Color.fromARGB(255, 230, 227, 226),
                             iconColor: Colors.deepOrangeAccent),
-                        onPressed: () {},
-                        child: const Icon(
-                          Icons.favorite_border,
-                          color: Colors.deepOrange,
-
-                          // Ensure correct text direction
+                        onPressed: () => setState(() {
+                          food[widget.foodIndex] = food[widget
+                                  .foodIndex] // this is for updating the food item, by using toggle method
+                              .copywith(
+                                  isFavorite:
+                                      !food[widget.foodIndex].isFavorite);
+                        }),
+                        child: Icon(
+                          food[widget.foodIndex].isFavorite
+                              // Check if the food item is favorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
                         ),
                       ),
                     ],
@@ -59,7 +71,7 @@ class TopBanner extends StatelessWidget {
                     heightFactor: size.height * 0.0014,
                     alignment: Alignment.center,
                     child: Image.network(
-                      foodItem.imgurl,
+                      food[widget.foodIndex].imgurl,
                       fit: BoxFit.contain,
                       height: size.height * 0.23,
                     ),
