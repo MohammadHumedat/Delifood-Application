@@ -38,9 +38,10 @@ class _TopBannerState extends State<TopBanner> {
                               const Color.fromARGB(255, 230, 227, 226),
                           iconColor: Colors.deepOrangeAccent,
                         ),
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: () => Navigator.of(context)
+                            .pop<String>(food[widget.foodIndex].name),
                         child: const Icon(
-                          Icons.chevron_left,
+                          Icons.chevron_left, // TO DO
                           size: 35,
                         ),
                       ),

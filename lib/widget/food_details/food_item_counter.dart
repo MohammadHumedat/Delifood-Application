@@ -31,14 +31,15 @@ class _FoodItemCounterState extends State<FoodItemCounter> {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: const EdgeInsets.only(top: 4, bottom: 4, right: 8, left: 8),
+        padding: const EdgeInsets.only(top: 4, bottom: 4, right: 5, left: 5),
         child: Row(
           children: [
             IconButton(
               onPressed: decrementCounter,
-              icon: const Icon(Icons.minimize),
-              iconSize: 25,
+              icon: const Icon(Icons.remove),
+              iconSize: 30,
               color: counter > 1 ? Colors.black : Colors.red,
+              alignment: Alignment.center,
             ),
             SizedBox(
               width: size.width * 0.050,
@@ -46,7 +47,7 @@ class _FoodItemCounterState extends State<FoodItemCounter> {
             Text(
               '$counter',
               style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 22,
                   color: Colors.black,
                   fontWeight: FontWeight.w600),
             ),
@@ -55,8 +56,10 @@ class _FoodItemCounterState extends State<FoodItemCounter> {
             ),
             IconButton(
               onPressed: incrementCounter,
-              icon: const Icon(Icons.add),
-              iconSize: 25,
+              icon: const Icon(
+                Icons.add,
+              ),
+              iconSize: 29,
             ),
           ],
         ),

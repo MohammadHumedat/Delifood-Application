@@ -15,8 +15,9 @@ class _FavoritePageState extends State<FavoritePage> {
     final textSacle = MediaQuery.of(context).textScaler;
     final size = MediaQuery.of(context).size;
 
-    final favoriteItems =
-        food.where((foodItem) => foodItem.isFavorite == true).toList();
+    final favoriteItems = food
+        .where((foodItem) => foodItem.isFavorite == true)
+        .toList(); // Filter favorite items from the food list, using the `where` method to check if `isFavorite` is true.
     if (favoriteItems.isEmpty) {
       return Center(
         child: Column(
@@ -40,21 +41,26 @@ class _FavoritePageState extends State<FavoritePage> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: ListView.builder(
         itemCount: favoriteItems.length,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => FoodDetailsPage(
-                      foodIndex: index,
-                    )));
+            Navigator.of(context)
+                .push<String>(MaterialPageRoute(
+                    builder: (context) => FoodDetailsPage(
+                          foodIndex: food.indexOf(favoriteItems[index]),
+                        )))
+                .then((value) {
+              setState(() {});
+              debugPrint('This is the name of $value');
+            });
           },
           child: Card(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0)),
+                borderRadius: BorderRadius.circular(15.0)),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12),
               child: Row(
                 children: [
                   Image.network(

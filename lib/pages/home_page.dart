@@ -60,13 +60,15 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) => GestureDetector(
                       onTap: () => {
                         Navigator.of(context)
-                            .push(MaterialPageRoute(
+                            .push<String>(MaterialPageRoute(
                                 builder: (context) => FoodDetailsPage(
                                     foodIndex:
                                         index // Pass the food item to the details page
                                     )))
-                            .then((value) => setState(
-                                () {})), // Refresh the home page after returning from the details page
+                            .then((value) {
+                          setState(() {});
+                          debugPrint('This is the food item name $value');
+                        }), // Refresh the home page after returning from the details page
                       },
                       child: FoodGridItem(
                         foodIndex: index,

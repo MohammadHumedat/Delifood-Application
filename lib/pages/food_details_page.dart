@@ -16,111 +16,135 @@ class FoodDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: _buildAppBar(context),
-      body: SingleChildScrollView(
+      body: SafeArea(
+        top: false,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TopBanner(
-                foodIndex:
-                    foodIndex), // Display the top banner with food image and favorite icon
-            const SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TopBanner(
+                        foodIndex:
+                            foodIndex), // Display the top banner with food image and favorite icon
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            food[foodIndex].name, // Display the food item name
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    food[foodIndex]
+                                        .name, // Display the food item name
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleLarge!
+                                        .copyWith(
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                  ),
+                                  const SizedBox(height: 6.0),
+                                  Text('Buffalo Burger',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall!
+                                          .copyWith(
+                                              fontSize: 16,
+                                              color: Colors.grey)),
+                                ],
+                              ),
+                              const FoodItemCounter(),
+                            ],
                           ),
-                          const SizedBox(height: 6.0),
-                          Text('Buffalo Burger',
+                          const SizedBox(height: 37.0),
+                          const IntrinsicHeight(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                PropertyItem(
+                                    propertyName: 'Size:',
+                                    propertyValue: 'Medium'),
+                                VerticalDivider(
+                                  indent: 0,
+                                  endIndent: 0,
+                                  color: Colors.grey,
+                                ),
+                                PropertyItem(
+                                    propertyName: 'Calories: ',
+                                    propertyValue: '150 kcal'),
+                                VerticalDivider(
+                                  indent: 0,
+                                  endIndent: 0,
+                                  color: Colors.grey,
+                                ),
+                                PropertyItem(
+                                    propertyName: 'Cooking: ',
+                                    propertyValue: '10-15 Min'),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 25),
+                          Text(
+                              """ lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem  lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem   lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem  ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson""",
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleSmall!
-                                  .copyWith(fontSize: 16, color: Colors.grey)),
+                                  .bodyMedium!
+                                  .copyWith(
+                                      color: const Color.fromARGB(
+                                          255, 136, 136, 136))),
+                          const SizedBox(
+                            height: 25,
+                          ),
                         ],
                       ),
-                      const FoodItemCounter(),
-                    ],
-                  ),
-                  const SizedBox(height: 37.0),
-                  const IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        PropertyItem(
-                            propertyName: 'Size:', propertyValue: 'Medium'),
-                        VerticalDivider(
-                          indent: 0,
-                          endIndent: 0,
-                          color: Colors.grey,
-                        ),
-                        PropertyItem(
-                            propertyName: 'Calories: ',
-                            propertyValue: '150 kcal'),
-                        VerticalDivider(
-                          indent: 0,
-                          endIndent: 0,
-                          color: Colors.grey,
-                        ),
-                        PropertyItem(
-                            propertyName: 'Cooking: ',
-                            propertyValue: '10-15 Min'),
-                        SizedBox(
-                          height: 20,
-                        ),
-                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 16.0,
+                right: 16.0,
+                bottom: 8.0,
+              ),
+              child: Row(
+                children: [
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor.withAlpha(100),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 15),
+                      child: Text('\$ ${food[foodIndex].price}',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w600,
+                              )),
                     ),
                   ),
-                  const SizedBox(height: 25),
-                  Text(
-                      """ lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson, lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson lorem ipson""",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: const Color.fromARGB(255, 136, 136, 136))),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Row(
-                    children: [
-                      DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor.withAlpha(100),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15, right: 15),
-                          child: Text('\$ ${food[foodIndex].price}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineMedium!
-                                  .copyWith(
-                                    color: Theme.of(context).primaryColor,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                        ),
-                      ),
-                      SizedBox(width: size.width * 0.19),
-                      Expanded(
-                        child: SizedBox(
-                          height: size.height * 0.05,
-                          child: ElevatedButton(
-                              onPressed: () {}, child: const Text('Checkout')),
-                        ),
-                      )
-                    ],
-                  ),
+                  SizedBox(width: size.width * 0.19),
+                  Expanded(
+                    child: SizedBox(
+                      height: size.height * 0.05,
+                      child: ElevatedButton(
+                          onPressed: () {}, child: const Text('Checkout')),
+                    ),
+                  )
                 ],
               ),
             ),
