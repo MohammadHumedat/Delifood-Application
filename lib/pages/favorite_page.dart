@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery/UI_models/food_details_argus.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/pages/food_details_page.dart';
+import 'package:food_delivery/utilities/app_assets.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -24,7 +27,7 @@ class _FavoritePageState extends State<FavoritePage> {
         child: Column(
           children: [
             Image.asset(
-              'assets/images/empty_state.png',
+              AppAssets.emptyState,
               height: size.height * 0.50,
               fit: BoxFit.cover,
             ),
@@ -50,7 +53,8 @@ class _FavoritePageState extends State<FavoritePage> {
             int targetedIndex = food.indexOf(favoriteItems[index]);
             Navigator.of(context)
                 .pushNamed(
-              "/food-details",
+              FoodDetailsPage.routeName,
+              // "/food-details",
               arguments: FoodDetailsArgus(foodIndex: targetedIndex),
             )
                 .then((value) {

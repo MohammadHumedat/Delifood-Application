@@ -8,6 +8,7 @@ import 'package:food_delivery/widget/food_details/top_banner.dart';
 class FoodDetailsPage extends StatelessWidget {
   const FoodDetailsPage({super.key});
 
+  static const String routeName = '/food-details';
   @override
   Widget build(BuildContext context) {
     // double sizeFactor = MediaQuery.of(context).size.height / 100;
@@ -15,6 +16,7 @@ class FoodDetailsPage extends StatelessWidget {
     final FoodDetailsArgus foodargs =
         ModalRoute.of(context)!.settings.arguments as FoodDetailsArgus;
     final foodIndex = foodargs.foodIndex;
+
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: _buildAppBar(context),

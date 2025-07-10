@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
       routes: {
         // Navigate using the named routes
         '/': (context) => const BottomNavBarPage(),
-        '/food-details': (context) => const FoodDetailsPage(),
+        FoodDetailsPage.routeName: (context) => FoodDetailsPage(),
       },
     );
   }

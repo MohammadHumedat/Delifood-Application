@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/utilities/app_assets.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -117,7 +118,7 @@ class AccountPage extends StatelessWidget {
                 SizedBox(
                     width: size.width *
                         0.05), // Add some space to the left of the row
-                Image.asset('assets/images/Myphoto.jpg',
+                Image.asset(AppAssets.profilePhoto,
                     height: size.height * 0.18,
                     width: size.height * 0.18,
                     fit: BoxFit.cover),

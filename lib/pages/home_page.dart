@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/UI_models/food_details_argus.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/pages/food_details_page.dart';
+import 'package:food_delivery/utilities/app_assets.dart';
 import 'package:food_delivery/widget/food_grid_item.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(22),
               child: Image.asset(
-                'assets/images/classic_burger.jpg',
+                AppAssets.burgerBanner,
                 height: isLandScape
                     // Check if the device is in landscape mode,using a ternary operator
                     ? size.height * 0.5
@@ -61,8 +62,8 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) => GestureDetector(
                       onTap: () => {
                         Navigator.of(context)
-                            .pushNamed('/food-details',
-                                arguments: FoodDetailsArgus(foodIndex: index ))
+                            .pushNamed(FoodDetailsPage.routeName,
+                                arguments: FoodDetailsArgus(foodIndex: index))
                             .then((value) {
                           setState(() {});
                           debugPrint('This is the food item name $value');
