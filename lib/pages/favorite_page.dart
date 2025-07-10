@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/UI_models/food_details_argus.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/pages/food_details_page.dart';
 
@@ -46,11 +47,12 @@ class _FavoritePageState extends State<FavoritePage> {
         itemCount: favoriteItems.length,
         itemBuilder: (context, index) => GestureDetector(
           onTap: () {
+            int targetedIndex = food.indexOf(favoriteItems[index]);
             Navigator.of(context)
-                .push<String>(MaterialPageRoute(
-                    builder: (context) => FoodDetailsPage(
-                          foodIndex: food.indexOf(favoriteItems[index]),
-                        )))
+                .pushNamed(
+              "/food-details",
+              arguments: FoodDetailsArgus(foodIndex: targetedIndex),
+            )
                 .then((value) {
               setState(() {});
               debugPrint('This is the name of $value');

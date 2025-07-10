@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/UI_models/food_details_argus.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/widget/food_details/food_item_counter.dart';
 import 'package:food_delivery/widget/food_details/property_item.dart';
 import 'package:food_delivery/widget/food_details/top_banner.dart';
 
 class FoodDetailsPage extends StatelessWidget {
-  final foodIndex;
-  const FoodDetailsPage({super.key, required this.foodIndex});
+  const FoodDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     // double sizeFactor = MediaQuery.of(context).size.height / 100;
     final size = MediaQuery.of(context).size;
-
+    final FoodDetailsArgus foodargs =
+        ModalRoute.of(context)!.settings.arguments as FoodDetailsArgus;
+    final foodIndex = foodargs.foodIndex;
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: _buildAppBar(context),

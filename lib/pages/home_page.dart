@@ -1,6 +1,7 @@
 // import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery/UI_models/food_details_argus.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/pages/food_details_page.dart';
 import 'package:food_delivery/widget/food_grid_item.dart';
@@ -60,11 +61,8 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (context, index) => GestureDetector(
                       onTap: () => {
                         Navigator.of(context)
-                            .push<String>(MaterialPageRoute(
-                                builder: (context) => FoodDetailsPage(
-                                    foodIndex:
-                                        index // Pass the food item to the details page
-                                    )))
+                            .pushNamed('/food-details',
+                                arguments: FoodDetailsArgus(foodIndex: index ))
                             .then((value) {
                           setState(() {});
                           debugPrint('This is the food item name $value');
