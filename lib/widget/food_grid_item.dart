@@ -5,7 +5,9 @@ import 'package:food_delivery/models/food_item.dart';
 
 class FoodGridItem extends StatefulWidget {
   final int foodIndex;
-  const FoodGridItem({super.key, required this.foodIndex});
+  final List<FoodItem> filteredFood;
+  const FoodGridItem(
+      {super.key, required this.foodIndex, required this.filteredFood});
 
   @override
   State<FoodGridItem> createState() => _FoodGridItemState();
@@ -14,6 +16,7 @@ class FoodGridItem extends StatefulWidget {
 class _FoodGridItemState extends State<FoodGridItem> {
   @override
   Widget build(BuildContext context) {
+    final targetedIndex = food.indexOf(widget.filteredFood[widget.foodIndex]);
     // final size = MediaQuery.of(context).size;
     final textScale = MediaQuery.of(context).textScaler;
     return Container(
@@ -30,9 +33,10 @@ class _FoodGridItemState extends State<FoodGridItem> {
                 Padding(
                   padding: const EdgeInsets.only(top: 7.0),
                   child: Image.network(
-                    food[widget.foodIndex].imgurl,
+                    widget.filteredFood[widget.foodIndex].imgurl,
                     fit: BoxFit.contain,
-                    height: constraints.maxHeight * 0.45,
+                    height: constraints.maxHeight *
+                        0.45, // Set the height using constraints and responsive design
                     alignment: Alignment.center,
                     width: constraints.maxWidth * 0.9,
                     errorBuilder: (context, error, stackTrace) {
@@ -65,13 +69,14 @@ class _FoodGridItemState extends State<FoodGridItem> {
                     ),
                     child: InkWell(
                       onTap: () => setState(() {
-                        food[widget.foodIndex] = food[widget
-                                .foodIndex] // this is for updating the food item, by using toggle method
-                            .copywith(
-                                isFavorite: !food[widget.foodIndex].isFavorite);
+                        final current = widget.filteredFood[widget.foodIndex];
+                        widget.filteredFood[widget.foodIndex] =
+                            current.copywith(
+                          isFavorite: !current.isFavorite,
+                        );
                       }),
                       child: Icon(
-                        food[widget.foodIndex]
+                        widget.filteredFood[widget.foodIndex]
                                 .isFavorite // Check if the food item is favorite
                             ? Icons.favorite
                             : Icons.favorite_border,
@@ -98,7 +103,7 @@ class _FoodGridItemState extends State<FoodGridItem> {
               child: FittedBox(
                 // Use FittedBox to scale text
                 child: Text(
-                  food[widget.foodIndex].name,
+                  widget.filteredFood[widget.foodIndex].name,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
@@ -109,7 +114,7 @@ class _FoodGridItemState extends State<FoodGridItem> {
             SizedBox(
               height: constraints.maxHeight * 0.16,
               child: FittedBox(
-                child: Text('\$ ${food[widget.foodIndex].price}',
+                child: Text('\$ ${widget.filteredFood[widget.foodIndex].price}',
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Colors.deepOrange,
                           fontFamily: 'OpenSans',
